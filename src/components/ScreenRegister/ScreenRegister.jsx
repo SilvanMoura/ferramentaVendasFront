@@ -24,7 +24,7 @@ const ScreenRegister = () => {
           <h1 className="h3 mb-3 fw-normal">Registre-se</h1>
 
           {/* Mostrar a mensagem (msg) aqui */}
-          {msg && <Message msg={msg} />}
+          {/* {msg && <Message msg={msg} />} */}
 
           <div className="form-floating">
             <input

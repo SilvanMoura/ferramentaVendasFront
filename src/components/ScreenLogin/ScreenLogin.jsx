@@ -26,7 +26,6 @@ const ScreenLogin = () => {
 
           <div className="form-floating">
 
-            {/* <label htmlFor="floatingInput">E-mail</label> */}
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -35,12 +34,12 @@ const ScreenLogin = () => {
               id="floatingInput"
               placeholder="name@example.com"
             />
+            <label htmlFor="floatingInput">E-mail</label>
             
           </div>
 
           <div className="form-floating">
 
-            {/* <label htmlFor="floatingPassword">Senha</label> */}
             <input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -49,6 +48,7 @@ const ScreenLogin = () => {
               id="floatingPassword"
               placeholder="Senha"
             />
+            <label htmlFor="floatingPassword">Senha</label>
             
           </div>
 

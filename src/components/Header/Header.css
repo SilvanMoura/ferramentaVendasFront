@@ -1,0 +1,26 @@
+header{
+    background-color: #fffbfb;
+    border-bottom: 4px solid #111;
+    padding: 15px 50px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-button{
+    color: #111;
+    text-decoration: none;
+    margin: 12px;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.nav-button:hover{
+    color: #6d644b;
+}
+
+.btn-auth{
+    font-size: 16px;
+    font-weight: bold;
+}

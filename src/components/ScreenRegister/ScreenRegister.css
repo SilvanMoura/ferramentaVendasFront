@@ -1,0 +1,60 @@
+#main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin #floatingUserName,
+.form-signin #floatingInput,
+.form-signin #floatingPassword{
+    margin-bottom: -1px;
+}
+
+.form-signin #floatingUserName {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin #floatingInput, .form-signin #floatingPassword  {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin #floatingConfirmPassword {
+    margin-bottom: 10px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+#btn-login{
+    margin: 15px 0;
+    text-align: center;
+}
+
+#btn-login button{
+    background-color: #fff;
+    border: none;
+    color: #FCBA03;
+}
+
+#btn-login button:hover{
+    color: #8f6902;
+}
+
+.btn-send{
+    color: #000;
+    background-color: #FCBA03;
+}
+
+.btn-send:hover{
+    color: #fbff00;
+}

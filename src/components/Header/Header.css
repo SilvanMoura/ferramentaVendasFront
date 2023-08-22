@@ -1,5 +1,5 @@
 header{
-    background-color: #fffbfb;
+    background-color: #222;
     border-bottom: 4px solid #111;
     padding: 15px 50px;
     height: 40px;
@@ -9,7 +9,7 @@ header{
 }
 
 .nav-button{
-    color: #111;
+    color: #FCBA03;
     text-decoration: none;
     margin: 12px;
     transition: .5s;

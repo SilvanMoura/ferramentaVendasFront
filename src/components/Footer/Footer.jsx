@@ -1,6 +1,10 @@
 import "./Footer.css";
 const Footer = () => {
-    return <div>Footer</div>;
+    return(
+        <footer id="footer">
+            <p>Ferramenta para análise de produtos</p>
+        </footer>
+    )
 };
 
 export default Footer;

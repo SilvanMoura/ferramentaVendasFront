@@ -1,6 +1,6 @@
 import "./Header.css";
 const Header = () => {
-    return <div>
+    return(
         <header>
 
             <nav>
@@ -12,7 +12,7 @@ const Header = () => {
             {/* <router-link to="/" class="btn-auth">Sair</router-link> */}
 
         </header>
-    </div>
+    )
 };
 
 export default Header;

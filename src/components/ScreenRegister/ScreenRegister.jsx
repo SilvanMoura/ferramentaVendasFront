@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ScreenRegister.css';
 
 const ScreenRegister = () => {
+  const navigate = useNavigate();
+
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,7 +17,7 @@ const ScreenRegister = () => {
   };
 
   const loadLogin = () => {
-    // Lógica para carregar a tela de login
+    navigate('/login');
   };
 
   return (

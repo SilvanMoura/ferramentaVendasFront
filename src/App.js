@@ -6,7 +6,7 @@ import Header from '../src/components/Header/Header';
 import ScreenLogin from '../src/components/ScreenLogin/ScreenLogin';
 import ScreenRegister from '../src/components/ScreenRegister/ScreenRegister';
 import SearchProduct from '../src/components/SearchProduct/SearchProduct';
-import ProductInfo from '../src/components/ProductInfo/ProductInfo';
+/* import ProductInfo from '../src/components/ProductInfo/ProductInfo'; */
 import Footer from '../src/components/Footer/Footer';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<SearchProduct />} />
-        <Route path="/Info" element={<ProductInfo />} />
+        {/* <Route path="/Info" element={<ProductInfo />} /> */}
         <Route path="/login" element={<ScreenLogin />} />
         <Route path="/register" element={<ScreenRegister />} />
       </Routes>

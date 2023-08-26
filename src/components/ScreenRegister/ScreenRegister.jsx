@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Message from '../Message/Message';
+import axios from 'axios';
 import './ScreenRegister.css';
 
 const ScreenRegister = () => {
@@ -13,7 +15,63 @@ const ScreenRegister = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Lógica de registro aqui
+    
+    if(userName == '' || email == '' || password == '' || confirmPassword == ''){
+                    
+      setMsg("Informações incompletas, revise os campos.");
+
+      setTimeout( () => {
+          setUserName('');
+          setEmail('');
+          setPassword('');
+          setConfirmPassword('');
+      }, 3000);
+
+      setMsg("");
+
+      return false;
+    }
+
+    if(password != confirmPassword){
+        setTimeout( () => {
+            setMsg("As senhas são diferentes, revise os campos.");
+            setConfirmPassword('');
+        }, 3000);
+        setMsg("");
+    }
+
+    const payload = {
+        name: userName,
+        email: email,
+        password: password
+    };
+
+    axios.post('http://localhost:8000/api/register', payload )
+      .then(response =>{
+        const data = response.data;
+
+        if( data == "success" ){
+            setMsg("Usuário cadastrado com sucesso");
+
+            setTimeout( () => {
+                setMsg("");
+                navigate('/login');
+
+            }, 3000);
+        }else{
+            setMsg("Cadastro não realizado, por favor, verifique as informações informadas");
+            setTimeout( () => {
+                setMsg("");
+
+                setUserName("");
+                setEmail("");
+                setPassword("");
+                setConfirmPassword("");
+
+            }, 3000);
+        }
+      })
+      .catch(error => console.log(error));
   };
 
   const loadLogin = () => {
@@ -26,8 +84,9 @@ const ScreenRegister = () => {
         <form onSubmit={handleSubmit}>
           <h1 className="h3 mb-3 fw-normal">Registre-se</h1>
 
-          {/* Mostrar a mensagem (msg) aqui */}
-          {/* {msg && <Message msg={msg} />} */}
+          {msg !== "" && 
+            <Message msg={msg} />
+          }
 
           <div className="form-floating">
             <input

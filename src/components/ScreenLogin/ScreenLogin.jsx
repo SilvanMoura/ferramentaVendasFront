@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import cookie from 'js-cookie';
+import Message from '../Message/Message';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './ScreenLogin.css';
 
@@ -11,7 +14,49 @@ const ScreenLogin = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Lógica de submissão aqui
+    
+    if(email == '' || password == ''){
+      setMsg("Informações incompletas, revise os campos.");
+
+      setTimeout( () => {
+          setEmail('');
+          setPassword('');
+      }, 3000);
+
+      setMsg("");
+
+      return false;
+    }
+
+    const payload = {
+        email: email,
+        password: password
+    };
+
+    axios.post('http://localhost:8000/api/login', payload )
+    .then(response =>{
+        const data = response.data;
+
+    
+        if( data.access_token ){
+            cookie.set('_myapp_token', data.access_token);
+            setMsg("Login realizado com sucesso");
+
+            setTimeout( () => {
+                setMsg("");
+                navigate('/');
+            }, 3000);
+        }else{
+          setMsg("Login não realizado, por favor, verifique o e-mail e/ou senha");
+
+          setTimeout( () => {
+            setMsg("");
+            setEmail("");
+            setPassword("");
+          }, 3000);
+        }
+    })
+    .catch(error => console.log(error));
   };
 
   const loadRegister = () => {
@@ -24,8 +69,9 @@ const ScreenLogin = () => {
         <form onSubmit={handleSubmit}>
           <h1 className="h3 mb-3 fw-normal">Entrar na conta</h1>
 
-          {/* Mostrar a mensagem (msg) aqui */}
-          {/* {msg && <Message msg={msg} />} */}
+          {msg !== "" && 
+            <Message msg={msg} />
+          }
 
           <div className="form-floating">
 

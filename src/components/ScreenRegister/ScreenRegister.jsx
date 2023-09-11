@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Message from '../Message/Message';
 import axios from 'axios';
+import cookie from 'js-cookie';
 import './ScreenRegister.css';
 
 const ScreenRegister = () => {
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(cookie.get('_myapp_token')){
+      navigate('/');
+    } 
+  }, [])
 
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
@@ -46,7 +53,7 @@ const ScreenRegister = () => {
         password: password
     };
 
-    axios.post('http://localhost:8000/api/register', payload )
+    axios.post('http://vps49161.publiccloud.com.br/api/register', payload )
       .then(response =>{
         const data = response.data;
 

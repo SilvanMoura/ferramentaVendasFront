@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import cookie from 'js-cookie';
 import ProductInfo from '../ProductInfo/ProductInfo';
+import { useNavigate } from 'react-router-dom';
 import './SearchProduct.css';
 
 const SearchProduct = () => {
+
+    const navigate = useNavigate();
+
     const [code, setCode] = useState('');
     const [productData, setProductData] = useState({
         title: '',
@@ -22,18 +27,25 @@ const SearchProduct = () => {
         rankings: [],
         mediaVendasDia: '',
         stars: '',
+        offers: ''
     });
 
     const [msg, setMsg] = useState('');
 
     const[showInfo, setShowInfo] = useState(false);
 
+    useEffect(()=>{
+        if(!cookie.get('_myapp_token')){
+          navigate('/login');
+        }
+    }, [])
+
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        axios.get(`http://localhost:8000/api/scrape/${code}`)
+        axios.get(`http://vps49161.publiccloud.com.br/api/scrape/${code}`)
             .then(response => {
-                
+                console.log(response.data)
                 if (response.data.rankings !== "Não encontrado") {
                     response.data.rankings = response.data.rankings.map((item, index) => (
                         <p key={index}>Nº {item} </p>
@@ -107,8 +119,9 @@ const SearchProduct = () => {
                 <ProductInfo title="ASIN" content={productData.ASIN} />
                 <ProductInfo title="Data de publicação do anúncio" content={productData.data} />
                 <ProductInfo title="Tempo de existencia do anúncio" content={productData.diasOnline} />
-                <ProductInfo title="Rankings do item" content={productData.rankings}/>
+                <ProductInfo title="Quantidade de vendedores para o produto"  content={productData.offers} />
                 <ProductInfo title="Média de vendas por dia" content={productData.mediaVendasDia} />
+                <ProductInfo title="Rankings do item" content={productData.rankings}/>
                 <ProductInfo title="Quantidade das estrelas em %"  content={productData.stars} />
             </div>
             }

@@ -3,7 +3,7 @@ import "./Message.css";
 
 const Message = ({ msg }) => {
     return (
-        <div class="message-container">
+        <div className="message-container">
             <p>
                 {msg}
             </p>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import cookie from 'js-cookie';
 import Message from '../Message/Message';
 import axios from 'axios';
@@ -8,55 +8,54 @@ import './ScreenLogin.css';
 const ScreenLogin = () => {
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    if(cookie.get('_myapp_token')){
+      navigate('/');
+    } 
+  }, [])
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    if(email == '' || password == ''){
+
+    if (email === '' || password === '') {
       setMsg("Informações incompletas, revise os campos.");
-
-      setTimeout( () => {
-          setEmail('');
-          setPassword('');
-      }, 3000);
-
-      setMsg("");
-
-      return false;
+      setTimeout(() => setMsg(""), 3000);
+      return;
     }
 
-    const payload = {
-        email: email,
-        password: password
-    };
+    try {
+      const response = await axios.post('http://vps49161.publiccloud.com.br/api/login', {
+        email,
+        password
+      });
 
-    axios.post('http://localhost:8000/api/login', payload )
-    .then(response =>{
-        const data = response.data;
+      const data = response.data;
 
-    
-        if( data.access_token ){
-            cookie.set('_myapp_token', data.access_token);
-            setMsg("Login realizado com sucesso");
+      if (data.access_token) {
+        cookie.set('_myapp_token', data.access_token);
+        setMsg("Login realizado com sucesso");
 
-            setTimeout( () => {
-                setMsg("");
-                navigate('/');
-            }, 3000);
-        }else{
-          setMsg("Login não realizado, por favor, verifique o e-mail e/ou senha");
+        setTimeout(() => {
+          window.location.href = "/";
+          setMsg("");
+        }, 3000);
 
-          setTimeout( () => {
-            setMsg("");
-            setEmail("");
-            setPassword("");
-          }, 3000);
-        }
-    })
-    .catch(error => console.log(error));
+      } else {
+        setMsg("Login não realizado, por favor, verifique o e-mail e/ou senha");
+
+        setTimeout(() => {
+          setMsg("");
+          setEmail("");
+          setPassword("");
+        }, 3000);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const loadRegister = () => {
@@ -74,7 +73,6 @@ const ScreenLogin = () => {
           }
 
           <div className="form-floating">
-
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -84,11 +82,9 @@ const ScreenLogin = () => {
               placeholder="name@example.com"
             />
             <label htmlFor="floatingInput">E-mail</label>
-            
           </div>
 
           <div className="form-floating">
-
             <input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -98,7 +94,6 @@ const ScreenLogin = () => {
               placeholder="Senha"
             />
             <label htmlFor="floatingPassword">Senha</label>
-            
           </div>
 
           <div id="btn-register">

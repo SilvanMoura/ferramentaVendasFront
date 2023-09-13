@@ -1,9 +1,197 @@
-#product-container {
+#main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form-signin .form-floating{
+    margin-bottom: 10px;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="text"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn-send{
+    color: #000;
+    background-color: #FCBA03;
+}
+
+.btn-send:hover{
+    background-color: #222;
+    color: #FCBA03;
+}
+
+/* #logistics-container {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     width: 100%;
-    max-width: 1200px;
+    max-width: 365px;
     margin: 0 auto;
     margin-bottom: 20px;
 }
+
+.amazon-calculator {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.logistics-title span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.logistics-item {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logistics-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+.logistics-input {
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.logistics-item p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #008000;
+}
+
+.logistics-input[value=""] {
+    background-color: #fff;
+    color: #333;
+}
+
+.logistics-input.error {
+    background-color: #ffe6e6;
+    color: #ff0000;
+} */
+
+#logistics-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.amazon-calculator{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    background-color: #f7f7f7;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo para o título */
+.logistics-title span {
+    font-size: 25px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Estilo para cada item */
+.logistics-item {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Estilo para textos informativos */
+.logistics-text {
+    margin-right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
+
+.sub-text{
+    font-size: 14px;
+}
+
+/* Estilo para campos de entrada de dados */
+.logistics-input {
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+/* Estilo para valores calculados */
+.logistics-item p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #008000; /* Verde para valores positivos */
+}
+
+/* Estilo para campos de entrada de dados em branco */
+.logistics-input[value=""] {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Estilo para valores em vermelho (pode ser usado para valores negativos) */
+.logistics-input.error {
+    background-color: #ffe6e6;
+    color: #ff0000;
+}
+
+.error{
+    font-size: 18px;
+    font-weight: bold;
+    color: #FF0000; /* Verde para valores positivos */
+}
+
+.logistics-item{
+    width: 100%;
+}
+
+.logistics-sub-item{
+    width: 80px;
+}
+
+.w-alt{
+    width: 100px;
+}
+
+.logistics-input-alt{
+    width: 100%;
+}
+

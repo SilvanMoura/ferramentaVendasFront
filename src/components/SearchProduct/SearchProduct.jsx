@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import cookie from 'js-cookie';
+import Message from '../Message/Message';
 import ProductInfo from '../ProductInfo/ProductInfo';
 import { useNavigate } from 'react-router-dom';
 import './SearchProduct.css';
@@ -73,7 +74,11 @@ const SearchProduct = () => {
                 setShowInfo(false);
                 setDisabledButton(false);
                 setActionButton("Pesquisar");
-                console.error('Erro na requisição:', error);
+
+                setMsg("Ocorreu um erro na requisição, tente novamente");
+                setTimeout( () => {
+                    setMsg("");
+                }, 3000);
             });
     };
 
@@ -84,8 +89,7 @@ const SearchProduct = () => {
                     <form onSubmit={handleSubmit}>
                         <h1 className="h3 mb-3 fw-normal">Pesquisar produto</h1>
 
-                        {/* Mostrar a mensagem (msg) aqui */}
-                        {/* {msg && <Message msg={msg} />} */}
+                        {msg && <Message msg={msg} />}
 
                         <div className="form-floating">
 

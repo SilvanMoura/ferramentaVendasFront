@@ -63,7 +63,6 @@ const ScreenRegister = () => {
             setTimeout( () => {
                 setMsg("");
                 navigate('/login');
-
             }, 3000);
         }else{
             setMsg("Cadastro não realizado, por favor, verifique as informações informadas");

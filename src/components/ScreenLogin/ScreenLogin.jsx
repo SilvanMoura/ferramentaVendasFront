@@ -54,7 +54,13 @@ const ScreenLogin = () => {
         }, 3000);
       }
     } catch (error) {
-      console.log(error);
+      setMsg("Login não realizado, por favor, verifique o e-mail e/ou senha");
+
+      setTimeout(() => {
+        setMsg("");
+        setEmail("");
+        setPassword("");
+      }, 3000);
     }
   };
 

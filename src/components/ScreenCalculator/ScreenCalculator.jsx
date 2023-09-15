@@ -8,7 +8,7 @@ const ScreenCalculator = () => {
     const navigate = useNavigate();
 
     const [code, setCode] = useState('');
-
+    
     //FBA
     const [price, setPrice] = useState(0);
     const [logistica, setLogistica] = useState('');
@@ -49,6 +49,7 @@ const ScreenCalculator = () => {
     const [netMarginDba, setNetMarginDba] = useState(0);
 
     const [msg, setMsg] = useState('');
+    const[showInfo, setShowInfo] = useState(false);
 
     useEffect(() => {
         if (!cookie.get('_myapp_token')) {
@@ -59,7 +60,7 @@ const ScreenCalculator = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios.get(`http://127.0.0.1:8000/api/calculatorMargin/${code}`)
+        axios.get(`http://vps49161.publiccloud.com.br/api/calculatorMargin/${code}`)
             .then(response => {
                 const infos = response.data;
 
@@ -120,7 +121,7 @@ const ScreenCalculator = () => {
                 ).toFixed(2);
                 setNetMarginDba(netMarginFloat);
 
-
+                setShowInfo(true);
             })
             .catch(error => {
                 console.error('Erro na requisição:', error);
@@ -215,11 +216,6 @@ const ScreenCalculator = () => {
         const calculatedNetProfit = ((parseFloat(price) - parseFloat(unitCost)) * parseFloat(e)).toFixed(2);
         setNetProfit(calculatedNetProfit);
     }
-
-
-
-
-
 
 
 
@@ -526,14 +522,15 @@ const ScreenCalculator = () => {
                         <button
                             className="w-100 btn btn-lg btn-send"
                             type="submit"
+                            
                         >
                             Pesquisar
                         </button>
                     </form>
                 </main>
-
             </div>
 
+            {showInfo &&
             <div id="logistics-container">
                 <div id="logistics-container" className="amazon-calculator">
 
@@ -730,9 +727,6 @@ const ScreenCalculator = () => {
                     </div>
 
                 </div>
-
-
-
 
                 <div id="logistics-container" className="amazon-calculator">
 
@@ -997,8 +991,8 @@ const ScreenCalculator = () => {
                     </div>
 
                 </div>
-
             </div>
+            }
 
         </div >
 

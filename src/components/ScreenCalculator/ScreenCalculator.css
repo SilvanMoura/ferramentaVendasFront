@@ -39,6 +39,7 @@
     flex-direction: row;
     margin-bottom: 40px;
 }
+
 .amazon-calculator{
     display: flex;
     flex-wrap: wrap;

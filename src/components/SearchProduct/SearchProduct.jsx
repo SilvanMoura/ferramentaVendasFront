@@ -10,6 +10,8 @@ const SearchProduct = () => {
     const navigate = useNavigate();
 
     const [code, setCode] = useState('');
+    const [disabledButton, setDisabledButton] = useState(false);
+    const [actionButton, setActionButton] = useState("Pesquisar");
     const [productData, setProductData] = useState({
         title: '',
         price: '',
@@ -42,6 +44,10 @@ const SearchProduct = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        setShowInfo(false);
+        setDisabledButton(true);
+        setActionButton("Processando");
         
         axios.get(`http://vps49161.publiccloud.com.br/api/scrape/${code}`)
             .then(response => {
@@ -59,9 +65,14 @@ const SearchProduct = () => {
                 setProductData(response.data);
 
                 setShowInfo(true);
+                setDisabledButton(false);
+                setActionButton("Pesquisar");
                 
             })
             .catch(error => {
+                setShowInfo(false);
+                setDisabledButton(false);
+                setActionButton("Pesquisar");
                 console.error('Erro na requisição:', error);
             });
     };
@@ -93,8 +104,9 @@ const SearchProduct = () => {
                         <button
                             className="w-100 btn btn-lg btn-send"
                             type="submit"
+                            disabled={disabledButton}
                         >
-                            Pesquisar
+                            {actionButton}
                         </button>
                     </form>
                 </main>

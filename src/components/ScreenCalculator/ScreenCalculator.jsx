@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import cookie from 'js-cookie';
+import Message from '../Message/Message';
 import { useNavigate } from 'react-router-dom';
 import './ScreenCalculator.css';
 
@@ -62,6 +63,7 @@ const ScreenCalculator = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        setShowInfo(false);
         setDisabledButton(true);
         setActionButton("Processando");
 
@@ -131,9 +133,14 @@ const ScreenCalculator = () => {
                 setActionButton("Pesquisar");
             })
             .catch(error => {
+                setShowInfo(false);
                 setDisabledButton(false);
                 setActionButton("Pesquisar");
-                console.error('Erro na requisição:', error);
+
+                setMsg("Ocorreu um erro na requisição, tente novamente");
+                setTimeout( () => {
+                    setMsg("");
+                }, 3000);
             });
     };
 
@@ -511,8 +518,7 @@ const ScreenCalculator = () => {
                     <form onSubmit={handleSubmit}>
                         <h1 className="h3 mb-3 fw-normal">Pesquisar produto para cálculo</h1>
 
-                        {/* Mostrar a mensagem (msg) aqui */}
-                        {/* {msg && <Message msg={msg} />} */}
+                        {msg && <Message msg={msg} />}
 
                         <div className="form-floating">
 

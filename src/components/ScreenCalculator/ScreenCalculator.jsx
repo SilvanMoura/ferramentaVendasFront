@@ -8,6 +8,8 @@ const ScreenCalculator = () => {
     const navigate = useNavigate();
 
     const [code, setCode] = useState('');
+    const [disabledButton, setDisabledButton] = useState(false);
+    const [actionButton, setActionButton] = useState("Pesquisar");
     
     //FBA
     const [price, setPrice] = useState(0);
@@ -59,6 +61,9 @@ const ScreenCalculator = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        setDisabledButton(true);
+        setActionButton("Processando");
 
         axios.get(`http://vps49161.publiccloud.com.br/api/calculatorMargin/${code}`)
             .then(response => {
@@ -122,8 +127,12 @@ const ScreenCalculator = () => {
                 setNetMarginDba(netMarginFloat);
 
                 setShowInfo(true);
+                setDisabledButton(false);
+                setActionButton("Pesquisar");
             })
             .catch(error => {
+                setDisabledButton(false);
+                setActionButton("Pesquisar");
                 console.error('Erro na requisição:', error);
             });
     };
@@ -218,7 +227,7 @@ const ScreenCalculator = () => {
     }
 
 
-
+    
     const handlePriceDba = (e, setState) => {
         setState(e);
 
@@ -522,9 +531,9 @@ const ScreenCalculator = () => {
                         <button
                             className="w-100 btn btn-lg btn-send"
                             type="submit"
-                            
+                            disabled={disabledButton}
                         >
-                            Pesquisar
+                            {actionButton}
                         </button>
                     </form>
                 </main>
